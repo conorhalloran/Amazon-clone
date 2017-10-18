@@ -1,0 +1,24 @@
+<%# Templates that are ment to be rendered as templates, and not pages themselves, should be prefixed with "_"%>
+<div>
+    <% if @product.errors.any? %>
+        <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+        </ul>
+    <% end %>
+</div>
+<%= form_for [@product, @review] do |form| %>
+<div>
+    <div>
+        <%= form.label :rating %>
+        <%= form.select :rating, (1..5).map { |num| [num, num]} %>
+    </div>
+    <div>
+        <%= form.label :body %>
+        <%= form.text_area :body %>
+    </div>
+    <%= form.submit %>
+</div>
+<% end %>
+</div>

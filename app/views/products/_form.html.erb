@@ -1,0 +1,32 @@
+<%# Templates that are ment to be rendered as templates, and not pages themselves, should be prefixed with "_"%>
+<div>
+    <% if @product.errors.any? %>
+        <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+        </ul>
+    <% end %>
+</div>
+<%= form_for [@cateogry, @product] do |form| %>
+<div>
+    <div>
+        <%= form.label :title %>
+        <%= form.text_field :title %>
+    </div>
+    <div>
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+    </div>
+    <div>
+        <%= form.label :price %>
+        <%= form.number_field(:price, in: 1.00..1000.00, step: 0.05) %>
+    </div>
+    <div>
+        <%= form.label :category_id %>
+        <%= form.select :category_id, @categories.map { |category| [category.name, category.id]} %>
+    </div>
+    <%= form.submit %>
+</div>
+<% end %>
+</div>

@@ -1,0 +1,28 @@
+<h1>Reach Out to Us Sucker!</h1>
+<p>This is the page where you send us your complaints which we'll read as we're sitting on the toilet</p>
+
+<section>
+    <h2>Please Complete this Form:</h2>
+    <%= form_tag contact_path do %>
+    <form 
+    class="d-flex flex-column"
+    action=''
+    method='POST'>
+        <div class="form-group">
+            <div><%= label_tag :name %></div>
+            <div><%= text_field_tag :name %></div>
+        </div>
+        <div class="form-group">
+            <div><%= label_tag :email %></div>
+            <div><%= email_field_tag :email %></div>
+        </div>
+        <div class="form-group">
+            <div><%= label_tag :content %></div>
+            <div><%= text_area_tag :content %></div>
+        </div>
+        <div class="form-group">
+            <div><%= submit_tag %></div>
+        </div>
+    </form>
+    <% end %>
+</section>
