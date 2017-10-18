@@ -1,7 +1,9 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :index]
   before_action :find_product, only: [:show, :edit, :update, :destroy]
   before_action :get_categories, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, except: [:show, :index]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  
   
   
   def new
@@ -39,6 +41,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    return head :unauthorized unless can?(:update, @product)
     @product = Product.find params[:id]
     if @product.update product_params
       redirect_to product_path(@product)
@@ -61,4 +64,14 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:title, :description, :price, :category_id)
   end
+
+  def authorize_user!
+    unless can?(:manage, @product)
+      flash[:alert] = "Access Denied!"
+      redirect_to root_path
+    end
+  end
+
+
+  ############# END #############
 end

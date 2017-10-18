@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :authorize_user!, only: [:destory, :edit]
   def new
   end
   
@@ -26,5 +27,13 @@ class ReviewsController < ApplicationController
     @product = @review.product  
     @review.destroy
     redirect_to product_path(@product), notice: 'Review Deleted'
+  end
+
+  private
+  def authorize_user!
+    unless can?(:manage, @review)
+      flash[:alert] = "Access Denied!"
+      redirect_to root_path
+    end
   end
 end
