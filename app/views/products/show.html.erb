@@ -32,9 +32,7 @@
     <p><strong>Rating: </strong><%= review.rating %></p> 
     <p><strong>Body: </strong><%= review.body %>
     <% if user_signed_in? && can?(:manage, review) %>
-        <% if can?(:destroy, review) %>
             <%= link_to 'Delete Review', [review], method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%end %>
     <%end %>
 <hr>
 <%end %>

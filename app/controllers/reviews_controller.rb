@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
+  before_action :find_review, only: [:destroy]
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :authorize_user!, only: [:destory, :edit]
+  before_action :authorize_user!, only: [:destroy]
   def new
   end
   
@@ -13,7 +14,6 @@ class ReviewsController < ApplicationController
     #   else
     #     render '/products/show'
     # end
-    review_params = params.require(:review).permit(:rating, :body)
     @review = Review.new review_params
     @product = Product.find(params[:product_id])
     @review.product = @product
@@ -23,13 +23,21 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = Review.find params[:id]
     @product = @review.product  
     @review.destroy
+    p @product
     redirect_to product_path(@product), notice: 'Review Deleted'
   end
 
   private
+  def review_params
+    params.require(:review).permit(:rating, :body)
+  end
+
+  def find_review
+    @review = Review.find params[:id]
+  end
+
   def authorize_user!
     unless can?(:manage, @review)
       flash[:alert] = "Access Denied!"
