@@ -42,7 +42,10 @@ RSpec.describe Product, type: :model do
 
   context ".price" do
     it "is present" do
+      skip = Product.skip_callback(:validation, :before, :set_defaults)
+      skip
       product = valid_product
+      # byebug
       product.price = nil
       product.valid?
       expect(product.errors.messages).to have_key(:price)
@@ -77,19 +80,51 @@ RSpec.describe Product, type: :model do
     end
   end
 
-  context '.sale_price' do
-
-    it 'is set to price by default' do
-    valid_product
-    expect(valid_product.sale_price).to eq(valid_product.price)
+  context ".sale_price" do
+    it "sale_price is set to price by default if no sale_price is given" do
+      product = valid_product
+      product.sale_price = nil
+      product.save
+      expect(product.sale_price).to eq(product.price)
     end
 
-    it 'must be less than or equal to price' do
-      valid_product
-      valid_product.sale_price = valid_product.price - 1
-      expect(valid_product.sale_price).to eq(valid_product.price -1)
+    it "sale_price keeps its value if sale_price is given" do
+      product = valid_product
+      sale = product.price - 3
+      product.sale_price = sale
+      product.save
+      expect(product.sale_price).to eq(sale)
+    end
+
+    it "sale_price less than or equal to price" do
+      product = valid_product
+      product.sale_price = product.price + 5
+      product.save
+      expect(product.errors.messages).to have_key(:sale_price)
     end
   end
+
+  context ".on_sale?" do
+    it "method exists and returns true if the item is on sale" do
+      product = valid_product
+      product.price = 10
+      product.sale_price = product.price - 3
+      product.save
+      expect(product.on_sale?).to eq(true)
+    end
+
+    it "method exists and returns false if the item is not on sale" do
+      product = valid_product
+      product.sale_price = product.price
+      product.save
+      expect(product.on_sale?).to eq(false)
+    end
+  end
+
+##########################################
+
+
+
 #### END ####
 end
 

@@ -34,6 +34,7 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:rating, :body)
   end
 
+
   def find_review
     @review = Review.find params[:id]
   end

@@ -10,6 +10,7 @@
     <%= link_to "Edit", edit_product_path(@product) %> |
     <%= link_to "Delete", product_path(@product), method: :delete, data: {confirm: "Are you sure"} %>
     <% end %>
+    
 <hr>
 <div>
     <%= form_for [@product, @review] do |f| %>
@@ -31,6 +32,10 @@
     <p><strong>By: </strong><%= review.user&.full_name %></p> 
     <p><strong>Rating: </strong><%= review.rating %></p> 
     <p><strong>Body: </strong><%= review.body %>
+    <p><%= pluralize(review.likes.count, 'person') %> like this review.</p>
+    <% if user_signed_in? %>
+        <%= link_to 'Like', review_likes_path(review), method: :post %>
+    <% end %>
     <% if user_signed_in? && can?(:manage, review) %>
             <%= link_to 'Delete Review', [review], method: :delete, data: { confirm: 'Are you sure?' } %>
     <%end %>
