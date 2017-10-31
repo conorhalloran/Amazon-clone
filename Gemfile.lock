@@ -78,6 +78,8 @@ GEM
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
     ffi (1.9.18)
+    font-awesome-rails (4.7.0.2)
+      railties (>= 3.2, < 5.2)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hirb (0.7.3)
@@ -229,6 +231,7 @@ DEPENDENCIES
   cowsay (~> 0.3.0)
   factory_girl_rails
   faker!
+  font-awesome-rails
   hirb
   interactive_editor
   jbuilder (~> 2.5)

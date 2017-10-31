@@ -1,8 +1,9 @@
 class Review < ApplicationRecord
     belongs_to :product
     belongs_to :user, optional: true
+
     has_many :likes, dependent: :destroy
-    has_many :users, through: :likes
+    has_many :likers, through: :likes, source: :user
 
 
     validates(:rating,{
@@ -12,4 +13,8 @@ class Review < ApplicationRecord
         presence: {message: 'must be provided'},
         uniqueness: true
     })
+
+    def like_for(user)
+        likes.find_by_user_id(user)
+    end
 end

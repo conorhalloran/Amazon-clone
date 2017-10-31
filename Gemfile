@@ -32,6 +32,7 @@ gem 'faker', github: 'stympy/faker'
 gem 'cowsay', '~> 0.3.0'
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
+gem 'font-awesome-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -42,7 +43,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'factory_girl_rails'
-  gem 'faker', github: 'stympy/faker'
 end
 
 group :development do

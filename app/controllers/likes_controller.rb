@@ -6,7 +6,9 @@ class LikesController < ApplicationController
         like = Like.new(user: current_user, review: review)
         like.review = review
         like.user = current_user
-        if like.save
+        if !can? :like, review
+            head :unauthorized
+        elsif like.save
             redirect_to like.review.product, notice: "Thanks for liking!"
         else
             redirect_to like.review.product, alert: "Can't like! Liked already?"
@@ -14,9 +16,12 @@ class LikesController < ApplicationController
     end
 
     def destroy
-        review = Campaign.find params[:review_id]
-        like = current_user.likes.find params[:id]
-        like.destroy
-        redirect_to review_path(review), notice: "Like removed!"
+        like = Like.find params[:id]
+        if can? :destroy, like
+            like.destroy
+            redirect_to like.review.product, notice: "Like removed!"
+        else
+            head :unauthorized
+        end
     end
 end

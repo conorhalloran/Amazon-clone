@@ -23,6 +23,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find params[:id]
     @review   = Review.new
+    @like = @review.likes.find_by_user_id current_user
   end
 
   def index

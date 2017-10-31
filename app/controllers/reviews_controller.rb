@@ -40,7 +40,7 @@ class ReviewsController < ApplicationController
   end
 
   def authorize_user!
-    unless can?(:manage, @review)
+    unless can?(:crud, @review)
       flash[:alert] = "Access Denied!"
       redirect_to root_path
     end

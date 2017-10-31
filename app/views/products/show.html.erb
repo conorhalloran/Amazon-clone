@@ -33,10 +33,14 @@
     <p><strong>Rating: </strong><%= review.rating %></p> 
     <p><strong>Body: </strong><%= review.body %>
     <p><%= pluralize(review.likes.count, 'person') %> like this review.</p>
-    <% if user_signed_in? %>
-        <%= link_to 'Like', review_likes_path(review), method: :post %>
+    <% if user_signed_in? && can?(:like, review) %>
+        <% if review.like_for(current_user).present? %>
+            <%= link_to fa_icon('heart'), like_path(review.like_for(current_user)), method: :delete %>
+            <% else %>
+            <%= link_to fa_icon('heart-o'), review_likes_path(review), method: :post %>
+        <% end %>
     <% end %>
-    <% if user_signed_in? && can?(:manage, review) %>
+    <% if user_signed_in? && can?(:crud, review) %>
             <%= link_to 'Delete Review', [review], method: :delete, data: { confirm: 'Are you sure?' } %>
     <%end %>
 <hr>
