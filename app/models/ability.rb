@@ -30,12 +30,20 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
     can :manage, Product do |product|
-    product.user == user 
+      product.user == user 
     end 
 
-    can :manage, Review do |review|
-    review.user == user 
+    can :crud, Review do |review|
+      review.user == user 
     end 
+
+    can :like, Review do |review|
+      review.user == user 
+    end 
+
+    can :destroy, Like do |like|
+      like.user == user
+    end
 
     ############## END ############
   end

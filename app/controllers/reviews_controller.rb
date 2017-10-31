@@ -34,12 +34,13 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:rating, :body)
   end
 
+
   def find_review
     @review = Review.find params[:id]
   end
 
   def authorize_user!
-    unless can?(:manage, @review)
+    unless can?(:crud, @review)
       flash[:alert] = "Access Denied!"
       redirect_to root_path
     end

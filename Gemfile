@@ -5,8 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.4.1'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use postgresql as the database for Active Record
@@ -34,6 +32,7 @@ gem 'faker', github: 'stympy/faker'
 gem 'cowsay', '~> 0.3.0'
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
+gem 'font-awesome-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -41,6 +40,9 @@ gem 'jquery-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails'
+  gem 'rails-controller-testing'
+  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -52,6 +54,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry' #pry gem itself
   gem 'pry-rails' #a gem that integrates pry with rails seemlessly
+  gem 'awesome_print'
+  gem 'interactive_editor'
   gem 'hirb'
 end
 

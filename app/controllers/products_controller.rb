@@ -4,8 +4,6 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
   
-  
-  
   def new
     @product = Product.new
     @categories = Category.all
@@ -25,6 +23,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find params[:id]
     @review   = Review.new
+    @like = @review.likes.find_by_user_id current_user
   end
 
   def index
