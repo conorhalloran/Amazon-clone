@@ -24,6 +24,7 @@ class ProductsController < ApplicationController
     @product = Product.find params[:id]
     @review   = Review.new
     @like = @review.likes.find_by_user_id current_user
+    @favourite = @product.favourites.find_by_user_id current_user
   end
 
   def index
@@ -65,7 +66,7 @@ class ProductsController < ApplicationController
   end
 
   def authorize_user!
-    unless can?(:manage, @product)
+    unless can?(:crud, @product)
       flash[:alert] = "Access Denied!"
       redirect_to root_path
     end
