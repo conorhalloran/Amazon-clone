@@ -1,0 +1,7 @@
+<div>
+    <% @tags.each do |tag| %>
+    <ul class="list-group m-2">
+        <li class="list-group-item list-group-item-action"><%= link_to tag.name, tag_path(tag) %></li>
+    </ul>
+    <% end %>
+</div>
