@@ -10,9 +10,9 @@
     <%= pluralize(@product.favourites.count, 'Person') %> Favourited this Product.
     <% if user_signed_in? && can?(:favourite, @product) %>
         <% if @favourite.present? %>
-            <%= link_to 'Un-favourite', favourite_path(@favourite), method: :delete %> |
+            <%= link_to fa_icon('star'), favourite_path(@favourite), method: :delete %> |
         <% else %>
-            <%= link_to 'Favourite', product_favourites_path(@product), method: :post %> |
+            <%= link_to fa_icon('star-o'), product_favourites_path(@product), method: :post %> |
         <% end %>
     <% end %>
     <% if user_signed_in? && can?(:crud, @product) %>
