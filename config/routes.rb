@@ -24,9 +24,11 @@ Rails.application.routes.draw do
   end
   resources :categories, only: [:create]
   resources :products do
+    resources :favourites, shallow: true, only: [:create, :destroy]
     resources :reviews, shallow: true, only: [:create, :destroy] do
       resources :likes, shallow: true, only: [:create, :destroy]
     end
+    
   end
 
   

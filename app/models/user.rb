@@ -6,6 +6,9 @@ class User < ApplicationRecord
     has_many :likes, dependent: :destroy
     has_many :liked_reviews, through: :likes, source: :review
 
+    has_many :favourites, dependent: :destroy
+    has_many :favourite_products, through: :favourites, source: :product
+
     before_validation :titleize_name
 
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

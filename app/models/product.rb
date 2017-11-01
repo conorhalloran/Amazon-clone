@@ -6,6 +6,9 @@ class Product < ApplicationRecord
     has_many :taggings, dependent: :destroy
     has_many :tags, through: :taggings
     
+    has_many :favourites, dependent: :destroy
+    has_many :favourited_users, through: :favourites, source: :user
+    # has_many :users, through: :favourites, source: :user
     
     # after_initialize :set_defaults
     before_validation :set_defaults

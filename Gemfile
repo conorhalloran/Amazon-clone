@@ -35,7 +35,6 @@ gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'chosen-rails'
 
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

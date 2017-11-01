@@ -70,6 +70,7 @@ products.each do |product|
             likers: users.shuffle.slice(0..rand(10))
         )
     end
+    product.favourited_users = users.shuffle.slice(0..rand(10))
     product.tags = tags.shuffle.slice(0..rand(5))
 
 end
