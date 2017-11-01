@@ -44,6 +44,12 @@ class Product < ApplicationRecord
         tags.map(&:name).join(', ')
     end
 
+    def tag_link
+        tags.each do |tag| 
+            link_to tag.name, tag
+        end
+    end
+
     private
     def titleize_title
         self.title = title.titleize if title.present?

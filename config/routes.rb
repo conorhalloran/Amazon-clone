@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
   resources :categories, only: [:create]
+  resources :tags, only: [:index, :show]
   resources :products do
     resources :favourites, shallow: true, only: [:create, :destroy]
     resources :reviews, shallow: true, only: [:create, :destroy] do

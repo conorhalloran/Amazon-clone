@@ -1,0 +1,7 @@
+<div>
+
+    <% @tag.products.each do |product| %>
+        <div><%= link_to product.title, product_path(product) %> </div>
+    <% end %>
+
+</div>
