@@ -2,6 +2,9 @@ class Product < ApplicationRecord
     belongs_to :category
     belongs_to :user, optional: true
     has_many :reviews, dependent: :destroy
+
+    has_many :taggings, dependent: :destroy
+    has_many :tags, through: :taggings
     
     
     # after_initialize :set_defaults
@@ -32,6 +35,10 @@ class Product < ApplicationRecord
 
     def on_sale?
         self.sale_price < self.price
+    end
+
+    def tag_list
+        tags.map(&:name).join(', ')
     end
 
     private
