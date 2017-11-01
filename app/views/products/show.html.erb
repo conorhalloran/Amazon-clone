@@ -4,6 +4,7 @@
     <p>Description: <%= @product.description %></p>
     <p>By: <%= @product.user&.full_name %></p>
     <p>Price: <%= number_to_currency(@product.price, :unit => "€") %></p>
+    <p><strong>Tags: </strong> <%= @product.tag_list %></p>
 <hr>
     <p>Created at: <%= @product.created_at %></p>
     <% if user_signed_in? && can?(:manage, @product) %>
@@ -31,7 +32,7 @@
 <hr>
     <p><strong>By: </strong><%= review.user&.full_name %></p> 
     <p><strong>Rating: </strong><%= review.rating %></p> 
-    <p><strong>Body: </strong><%= review.body %>
+    <p><strong>Body: </strong><%= review.body %></p>
     <p><%= pluralize(review.likes.count, 'person') %> like this review.</p>
     <% if user_signed_in? && can?(:like, review) %>
         <% if review.like_for(current_user).present? %>

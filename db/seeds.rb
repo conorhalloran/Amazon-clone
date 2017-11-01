@@ -10,6 +10,7 @@ Product.destroy_all
 Category.destroy_all
 Review.destroy_all
 User.destroy_all
+Tag.destroy_all
 
 PASSWORD = 'password'
 
@@ -53,15 +54,23 @@ end
 
 products = Product.all
 
+30.times do 
+    Tag.create(name: Faker::Space.galaxy)
+end
+
+tags = Tag.all
+
 products.each do |product|
     rand(0..5).times.each do
         Review.create(
             body: Faker::Company.catch_phrase,
             rating: rand(1..5),
             product_id: product[:id],
-            user: users.sample
+            user: users.sample,
+            likers: users.shuffle.slice(0..rand(10))
         )
     end
+    product.tags = tags.shuffle.slice(0..rand(5))
 
 end
 
@@ -70,4 +79,5 @@ reviews = Review.all
 puts Cowsay.say("Created #{users.count} users", :tux)
 puts Cowsay.say("Created #{reviews.count} reviews", :moose)
 puts Cowsay.say("Created #{products.count} products", :ghostbusters)
+puts Cowsay.say("Created #{tags.count} tags", :moose)
 puts "Login with #{super_user.email} and password of '#{PASSWORD}'"
