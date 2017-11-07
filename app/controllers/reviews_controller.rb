@@ -19,6 +19,7 @@ class ReviewsController < ApplicationController
     @review.product = @product
     @review.user = current_user
     @review.save
+    ReviewsMailer.notify_product_creator(@review).deliver_now
     redirect_to product_path(@product)
   end
 

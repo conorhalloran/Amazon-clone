@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
     @product = Product.new product_params
     @product.user = current_user
     if @product.save
-      ProductsMailer.notify_product_owner(@product).deliver_now
+      ProductRemindersJob.set(wait_until: 5.days.from_now).perform_later(@product.id)
       redirect_to product_path(@product)
     else
       @categories = Category.all
