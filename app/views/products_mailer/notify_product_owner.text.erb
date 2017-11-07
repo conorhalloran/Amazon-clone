@@ -1,0 +1,9 @@
+Hello <%= @owner.full_name %>,
+You Created a new Product.
+Product title: <%= @product.title %>
+Description: <%= @product.description %>
+Price: <%= @product.price %>
+Sale Price: <%= @product.sale_price %>
+<%= link_to 'Click Here to View the Product', product_url(@product) %>
+Regards,
+Amazon Clone Team
