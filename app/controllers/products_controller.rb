@@ -26,6 +26,11 @@ class ProductsController < ApplicationController
     @review   = Review.new
     @like = @review.likes.find_by_user_id current_user
     @favourite = @product.favourites.find_by_user_id current_user
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @product }
+    end
   end
 
   def index
