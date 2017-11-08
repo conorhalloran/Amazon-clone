@@ -36,6 +36,7 @@ gem 'font-awesome-rails'
 gem 'chosen-rails'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
+gem 'active_model_serializers'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

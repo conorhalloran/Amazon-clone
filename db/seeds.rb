@@ -28,7 +28,8 @@ User.create(
     first_name: first_name,
     last_name: last_name,
     email: "#{first_name.downcase}.#{last_name.downcase}@example.com",
-    password: PASSWORD
+    password: PASSWORD,
+    api_key: SecureRandom.urlsafe_base64(64)
 )
 end
 

@@ -5,5 +5,6 @@ class ProductRemindersJob < ApplicationJob
     product = Product.find product_id
     if product.reviews.count == 0 
     # Do something later
+    end
   end
 end
