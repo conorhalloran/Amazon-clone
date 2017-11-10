@@ -4,7 +4,7 @@ class Api::V1::ProductsController < Api::BaseController
 
     def index
         @products = Product.order(created_at: :desc).limit(10)
-        # render json: @products 
+        render json: @products 
     end
 
     def show
@@ -19,6 +19,16 @@ class Api::V1::ProductsController < Api::BaseController
             render json: product
             else
             render json: { errors: product.errors.full_messages }
+        end
+    end
+
+    def destroy
+        product = Product.find_by_id params[:id]
+        if product
+            product.destroy
+            render json: {success: true}
+        else
+            render json: { errors: ['Product does\'t exist'] }
         end
     end
 

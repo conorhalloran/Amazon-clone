@@ -18,7 +18,9 @@ super_user = User.create(
     first_name: 'Jon',
     last_name: 'Snow',
     email: 'js@winterfell.gov',
-    password: PASSWORD
+    password: PASSWORD,
+    api_key: SecureRandom.urlsafe_base64(64)
+
   )
 
 10.times.each do
@@ -43,6 +45,12 @@ end
 
 categories = Category.all
 
+30.times do 
+    Tag.create(name: Faker::Space.galaxy)
+end
+
+tags = Tag.all
+
 1000.times.each do
     Product.create(
         title: Faker::FunnyName.three_word_name, 
@@ -54,12 +62,6 @@ categories = Category.all
 end
 
 products = Product.all
-
-30.times do 
-    Tag.create(name: Faker::Space.galaxy)
-end
-
-tags = Tag.all
 
 products.each do |product|
     rand(0..5).times.each do

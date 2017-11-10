@@ -1,7 +1,7 @@
 class Api::BaseController < ApplicationController
 
     protect_from_forgery with: :null_session
-    before_action :authenticate_api_user
+    # before_action :authenticate_api_user
 
     private
 
