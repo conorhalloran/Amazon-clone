@@ -1,4 +1,9 @@
 class Product < ApplicationRecord
+    extend FriendlyId
+    friendly_id :title, use: [:slugged, :history]
+
+    mount_uploader :image, ImageUploader
+
     belongs_to :category
     belongs_to :user, optional: true
     has_many :reviews, dependent: :destroy
@@ -8,6 +13,9 @@ class Product < ApplicationRecord
     
     has_many :favourites, dependent: :destroy
     has_many :favourited_users, through: :favourites, source: :user
+
+    
+
     # has_many :users, through: :favourites, source: :user
     
     # after_initialize :set_defaults
@@ -34,6 +42,10 @@ class Product < ApplicationRecord
 
     # def self.search(string)
     #     where('title ILIKE ?', "%#{string}%").or(self.where('description ILIKE ?', "%#{string}%")).order('title, description')    
+    # end
+
+    # def to_param
+    #     "#{title}-#{id}".parameterize
     # end
 
     def on_sale?
