@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
     @product = Product.new product_params
     @product.user = current_user
     if @product.save
+      ProductRemindersJob.set(wait_until: 5.days.from_now).perform_later(@product.id)
       redirect_to product_path(@product)
     else
       @categories = Category.all
@@ -21,10 +22,15 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find params[:id]
+    @product = Product.friendly.find(params[:id])
     @review   = Review.new
     @like = @review.likes.find_by_user_id current_user
     @favourite = @product.favourites.find_by_user_id current_user
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @product }
+    end
   end
 
   def index
@@ -42,7 +48,7 @@ class ProductsController < ApplicationController
 
   def update
     return head :unauthorized unless can?(:update, @product)
-    @product = Product.find params[:id]
+    @product.slug = nil
     if @product.update product_params
       redirect_to product_path(@product)
     else
@@ -56,13 +62,12 @@ class ProductsController < ApplicationController
     @categories = Category.all
   end
 
-
-  def find_product
-    @product = Product.find params[:id]
+  def product_params
+    params.require(:product).permit(:title, :description, :image, :price, :category_id, {tag_ids: []})
   end
 
-  def product_params
-    params.require(:product).permit(:title, :description, :price, :category_id, {tag_ids: []})
+  def find_product
+    @product = Product.friendly.find(params[:id])
   end
 
   def authorize_user!

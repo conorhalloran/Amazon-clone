@@ -34,6 +34,15 @@ gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'chosen-rails'
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
+gem 'active_model_serializers'
+gem 'rack-cors'
+gem 'friendly_id', '~> 5.1.0'
+gem 'simple_form'
+gem 'carrierwave', '~> 1.0'
+gem "mini_magick"
+gem 'fog'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -58,6 +67,7 @@ group :development do
   gem 'awesome_print'
   gem 'interactive_editor'
   gem 'hirb'
+  gem "letter_opener"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

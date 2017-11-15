@@ -1,0 +1,8 @@
+Hello <%= @creator.full_name %>,
+You a New Review for your Product: <%= @product.title %>.
+Review: <%= @review.body %>
+Rating: <%= @review.rating %>
+By: <%= @review.user %>
+<%= link_to 'Click Here to View the Review', product_url(@product) %>
+Regards,
+Amazon Clone Team

@@ -4,6 +4,7 @@
     <p>Description: <%= @product.description %></p>
     <p>By: <%= @product.user&.full_name %></p>
     <p>Price: <%= number_to_currency(@product.price, :unit => "€") %></p>
+    <%= image_tag @product.image.url(:large) %>
     <p><strong>Tags: </strong><br>
         <% @product.tags.each do |tag| %>
             <%= link_to tag.name, tag %><br>
@@ -41,7 +42,8 @@
 
 <hr>
     <% @product.reviews.each do |review|%>
-<hr>
+    <div id="review-<%= review.id %>">
+    <hr>
     <p><strong>By: </strong><%= review.user&.full_name %></p> 
     <p><strong>Rating: </strong><%= review.rating %></p> 
     <p><strong>Body: </strong><%= review.body %></p>
@@ -56,5 +58,6 @@
     <% if user_signed_in? && can?(:crud, review) %>
             <%= link_to 'Delete Review', [review], method: :delete, data: { confirm: 'Are you sure?' } %>
     <%end %>
+    </div>
 <hr>
 <%end %>
