@@ -1,7 +1,8 @@
 class ProductSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :created_at, :taggings, :review_count, :reviews, :price, :sale_price, :favourites
+  attributes :id, :title, :description, :created_at, :taggings, :review_count, :reviews, :price, :sale_price, :favourites, :user
 
   belongs_to :category
+  belongs_to :user
   has_many :reviews
   has_many :tags
 

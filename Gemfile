@@ -43,6 +43,7 @@ gem 'simple_form'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem 'fog'
+gem 'jwt'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

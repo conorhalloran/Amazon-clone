@@ -1,6 +1,7 @@
 class Api::V1::ProductsController < Api::BaseController
 
     protect_from_forgery with: :null_session
+    before_action :authenticate_api_user
 
     def index
         @products = Product.order(created_at: :desc).limit(10)
